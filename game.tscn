@@ -2,13 +2,18 @@
 
 [ext_resource type="PackedScene" uid="uid://c1sx7bic4uhdj" path="res://player.tscn" id="1_e2o6t"]
 [ext_resource type="Script" uid="uid://dususlr2yr63q" path="res://game.gd" id="1_fc0e3"]
-[ext_resource type="PackedScene" uid="uid://c0gpy0pye4jr6" path="res://tree.tscn" id="2_feb5d"]
+[ext_resource type="PackedScene" uid="uid://cdk7gbdj7lubp" path="res://tree_spawner.tscn" id="4_7jktm"]
 
 [sub_resource type="Curve2D" id="Curve2D_feb5d"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 2042, -150, 0, 0, 0, 0, 2042, 1172, 0, 0, 0, 0, -119, 1172, 0, 0, 0, 0, -119, -150, 0, 0, 0, 0, 2042, -150)
 }
 point_count = 5
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fc0e3"]
+noise_type = 0
+seed = 1
+frequency = 0.0388
 
 [node name="Game" type="Node2D" unique_id=1543251644]
 y_sort_enabled = true
@@ -17,12 +22,12 @@ script = ExtResource("1_fc0e3")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=199041173]
 layer = -30
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=617258135]
+[node name="Background" type="ColorRect" parent="CanvasLayer" unique_id=617258135]
 offset_right = 1920.0
 offset_bottom = 1080.0
 
 [node name="Player" parent="." unique_id=2097436099 instance=ExtResource("1_e2o6t")]
-position = Vector2(963, 541)
+position = Vector2(958, 539)
 
 [node name="MobSpawnPath" type="Path2D" parent="Player" unique_id=1236692524]
 position = Vector2(-963, -541)
@@ -38,23 +43,9 @@ unique_name_in_owner = true
 wait_time = 0.3
 autostart = true
 
-[node name="Tree" parent="." unique_id=2095083872 instance=ExtResource("2_feb5d")]
-position = Vector2(632, 414)
-
-[node name="Tree2" parent="." unique_id=2067246242 instance=ExtResource("2_feb5d")]
-position = Vector2(1459, 362)
-
-[node name="Tree3" parent="." unique_id=63556203 instance=ExtResource("2_feb5d")]
-position = Vector2(1247, 806)
-
-[node name="Tree4" parent="." unique_id=1267807321 instance=ExtResource("2_feb5d")]
-position = Vector2(1309, 864)
-
-[node name="Tree5" parent="." unique_id=945781787 instance=ExtResource("2_feb5d")]
-position = Vector2(1189, 885)
-
-[node name="Tree6" parent="." unique_id=1476517468 instance=ExtResource("2_feb5d")]
-position = Vector2(471, 767)
+[node name="TreeSpawner" parent="." unique_id=473368918 node_paths=PackedStringArray("player") instance=ExtResource("4_7jktm")]
+player = NodePath("../Player")
+noise_map = SubResource("FastNoiseLite_fc0e3")
 
 [node name="GameOver" type="CanvasLayer" parent="." unique_id=675521235]
 unique_name_in_owner = true
