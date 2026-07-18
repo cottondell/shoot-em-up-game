@@ -4,8 +4,7 @@ A vampire survivor like game made & extended from the GDQuest
 
 ## Extensions
 - ~~Make gun actually point at closest mob, not first in array~~
-- Flip gun visuals left / right depending on aim direciton
-  - `scale.x = -1.0`
+- ~~Flip gun visuals left / right depending on aim direciton~~
 - Flip player visuals left / right depending on movement direction
 - Random spawning trees as you move around
 - Add support for multiple guns (each points as a different enemy)
