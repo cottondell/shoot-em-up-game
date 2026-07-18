@@ -1,11 +1,13 @@
 extends Area2D
 
-var target: Mob
-@onready var normal_gun_visuals_scale_y = %Pistol.scale.y
+@onready var facing_right_visual_scale_y = %Pistol.scale.y
+
+var target: Node2D
+var is_facing_right: bool = true
 
 func _physics_process(delta: float) -> void:
 	if aim_at_target():
-		fix_visuals_orientation()
+		fix_visual_orientation()
 
 func get_closest_enemy() -> Node2D:
 	var enemies_in_range: Array[Node2D] = get_overlapping_bodies()
@@ -50,11 +52,23 @@ func aim_at_target() -> bool:
 	
 	return true
 
-func fix_visuals_orientation():
-	if abs(rotation) > PI / 2:
-		%Pistol.scale.y = -normal_gun_visuals_scale_y
+func fix_visual_orientation():
+	var new_is_facing_right = abs(rotation) < PI / 2
+	
+	# Hasn't changed facing
+	if is_facing_right == new_is_facing_right:
+		return
+	
+	# Facing right = set normal scale
+	if new_is_facing_right:
+		%Pistol.scale.y = facing_right_visual_scale_y
+	
+	# Facing left = set negative of normal scale
 	else:
-		%Pistol.scale.y = normal_gun_visuals_scale_y
+		%Pistol.scale.y = -facing_right_visual_scale_y
+	
+	# Set is_facing_right
+	is_facing_right = new_is_facing_right
 
 func shoot():
 	const BULLET = preload("res://bullet.tscn")
