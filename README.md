@@ -1,4 +1,8 @@
-# Extensions
+# Shoot 'em Up
+A vampire survivor like game made & extended from the GDQuest 
+"Your First 2D GAME From Zero in Godot 4" tutorial ([link to tutorial](https://youtu.be/GwCiGixlqiU)).
+
+## Extensions
 - ~~Make gun actually point at closest mob, not first in array~~
 - Flip gun visuals left / right depending on aim direciton
   - `scale.x = -1.0`
