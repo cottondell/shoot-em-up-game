@@ -12,7 +12,7 @@ extends Node2D
 # - Make an iterator for iterating along the outside of a box:
 #     https://docs.godotengine.org/en/latest/tutorials/scripting/gdscript/gdscript_advanced.html#custom-iterators
 
-const DEBUG_MODE: bool = true
+const DEBUG_MODE: bool = false
 
 const TREE: Resource = preload("res://tree.tscn")
 const TREE_SPACING: Vector2 = Vector2(124, 100)

@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 
 # Declare signals
@@ -15,7 +16,7 @@ var was_walking: bool = false
 func _ready() -> void:
 	%HealthBar.value = health
 	
-	for i in range(1):
+	for i in range(2):
 		const GUN = preload("res://gun.tscn")
 		
 		var new_gun: Gun = GUN.instantiate()
@@ -49,13 +50,24 @@ func update_player_movement():
 		was_walking = false
 		%HappyBoo.play_idle_animation()
 
+func add_health(value: float):
+	health += value
+	
+	if health > 100:
+		health = 100
+
+func remove_health(value: float):
+	health -= value
+	
+	if health < 0:
+		health = 0
+	
+	if health == 0:
+		health_depleted.emit()
+
 # Calculate damage that should be applied to player and deal it
 func calculate_damage_self(delta: float):
 	var overlapping_mobs = %HurtBox.get_overlapping_bodies()
 	if overlapping_mobs.size() > 0:
-		health -= damage_rate * overlapping_mobs.size() * delta
+		remove_health(damage_rate * overlapping_mobs.size() * delta)
 		%HealthBar.value = health
-		
-		if health <= 0:
-			health = 0
-			health_depleted.emit()
