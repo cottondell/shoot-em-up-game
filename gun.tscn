@@ -3,16 +3,8 @@
 [ext_resource type="Script" uid="uid://bpyfw0mh6bsnv" path="res://gun.gd" id="1_dk5gl"]
 [ext_resource type="Texture2D" uid="uid://coon1w77o334i" path="res://pistol/pistol.png" id="1_vk1bi"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_8a46v"]
-radius = 473.1522
-
-[node name="Gun" type="Area2D" unique_id=601680121]
-collision_layer = 0
-collision_mask = 2
+[node name="Gun" type="Node2D" unique_id=167752776]
 script = ExtResource("1_dk5gl")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1573557961]
-shape = SubResource("CircleShape2D_8a46v")
 
 [node name="WeaponPivot" type="Marker2D" parent="." unique_id=1411927407]
 
@@ -25,13 +17,8 @@ texture = ExtResource("1_vk1bi")
 unique_name_in_owner = true
 position = Vector2(26, -11)
 
-[node name="ShootTimer" type="Timer" parent="." unique_id=493512823]
+[node name="AutofireTimer" type="Timer" parent="." unique_id=493512823]
+unique_name_in_owner = true
 wait_time = 0.3
-autostart = true
 
-[node name="TargetSwitchTimer" type="Timer" parent="." unique_id=1569461882]
-wait_time = 0.2
-autostart = true
-
-[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
-[connection signal="timeout" from="TargetSwitchTimer" to="." method="_on_target_switch_timer_timeout"]
+[connection signal="timeout" from="AutofireTimer" to="." method="_on_autofire_timer_timeout"]

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cncs65q1svmfm"]
+
+[ext_resource type="Script" uid="uid://dw8nrsrfxdefc" path="res://gun_handler.gd" id="1_m8n5c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_udid6"]
+radius = 473.1522
+
+[node name="GunHandler" type="Area2D" unique_id=210950427]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_m8n5c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1242354754]
+shape = SubResource("CircleShape2D_udid6")

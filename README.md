@@ -7,7 +7,8 @@ A vampire survivor like game made & extended from the GDQuest
 - ~~Flip gun visuals left / right depending on aim direciton~~
 - ~~Add state understanding to player animation controller & gun flipping~~
 - ~~Randomly spawn trees as player moves around~~
-- Add support for holding multiple guns (each points at a different enemy)
+- ~~Add support for holding multiple guns (each points at a different enemy)~~
+  - Not pleased with how I implemented the gun handling - the gun class is alright tho
 - Random chance to spawn heal item as enemy when killed
 - Add waves which increase in difficulty (infinite)
 - Spawn heal item at last alive enemy of each wave once complete

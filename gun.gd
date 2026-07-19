@@ -1,36 +1,82 @@
-extends Area2D
+class_name Gun
+extends Node2D
 
-@onready var facing_right_visual_scale_y = %Pistol.scale.y
+# Changing how guns work:
+# - Only mode currently is follow mode
+# - Guns have a target which is set by another script
+# - They constantly point at the target
+# - Other script tells them when to fire via function
+# - Optional auto-fire mode where speed can be set by other script
 
+# Private variables
+var _is_facing_right: bool = true
+@onready var _facing_right_visual_scale_y = %Pistol.scale.y
+
+# Autofire variables
 var target: Node2D
-var is_facing_right: bool = true
+var autofire_enabled: bool = false
+var autofire_delay: float = 0.3
 
-func _physics_process(delta: float) -> void:
+# Engine events
+func _ready() -> void:
+	if autofire_enabled:
+		%AutofireTimer.start(autofire_delay)
+
+func _physics_process(_delta: float) -> void:
+	# Try aim at target
 	if aim_at_target():
+		# Flip orientation of gun visual if needed
 		fix_visual_orientation()
 
-func get_closest_enemy() -> Node2D:
-	var enemies_in_range: Array[Node2D] = get_overlapping_bodies()
+# Functions
+## Fire a bullet from the shoot point of the gun.
+func shoot():
+	const BULLET = preload("res://bullet.tscn")
 	
-	# Return if no enemies in range
-	if enemies_in_range.size() == 0:
+	# Instantiate new bullet at shoot point with rotation of gun
+	var new_bullet: Area2D = BULLET.instantiate()
+	new_bullet.global_position = %ShootPoint.global_position
+	new_bullet.global_rotation = global_rotation
+	%ShootPoint.add_child(new_bullet)
+
+# Autofire functions
+func enable_autofire():
+	if autofire_enabled:
 		return
 	
-	# Set closest enemy to first one
-	var closest_enemy: Node2D = enemies_in_range.pop_front()
-	var closest_distance: float = global_position.distance_to(closest_enemy.global_position)
+	autofire_enabled = true
 	
-	# Loop through all other enemies
-	for enemy in enemies_in_range:
-		var enemy_distance = global_position.distance_to(enemy.global_position)
-		
-		# Check if enemy is closer than closest so far
-		if enemy_distance < closest_distance:
-			closest_enemy = enemy
-			closest_distance = enemy_distance
-	
-	return closest_enemy
+	if is_node_ready():
+		print(%AutofireTimer.paused)
+		%AutofireTimer.start(autofire_delay)
+		print(%AutofireTimer.paused)
 
+func disable_autofire():
+	if !autofire_enabled:
+		return
+	
+	autofire_enabled = false
+	
+	if is_node_ready():
+		%AutofireTimer.stop()
+
+func set_autofire_delay(delay: float):
+	autofire_delay = delay
+	
+	if autofire_enabled && is_node_ready():
+		%AutofireTimer.wait_time = delay
+
+## Shoot gun when autofire timer times out
+func _on_autofire_timer_timeout() -> void:
+	# Shoot gun if autofire is enabled
+	if autofire_enabled:
+		shoot()
+	
+	# Safety catch incase timer is enabled when it should be disabled
+	else:
+		%AutofireTimer.stop()
+
+## Rotate gun to point at target, if one is set.
 func aim_at_target() -> bool:
 	# No target to aim at
 	if !target:
@@ -52,38 +98,21 @@ func aim_at_target() -> bool:
 	
 	return true
 
+## Change y scale to flip gun depending on which direction it's facing.
 func fix_visual_orientation():
 	var new_is_facing_right = abs(rotation) < PI / 2
 	
-	# Hasn't changed facing
-	if is_facing_right == new_is_facing_right:
+	# Not changed -> don't do anything
+	if _is_facing_right == new_is_facing_right:
 		return
 	
+	# Changed -> update facing
+	_is_facing_right = new_is_facing_right
+	
 	# Facing right = set normal scale
-	if new_is_facing_right:
-		%Pistol.scale.y = facing_right_visual_scale_y
+	if _is_facing_right:
+		%Pistol.scale.y = _facing_right_visual_scale_y
 	
 	# Facing left = set negative of normal scale
 	else:
-		%Pistol.scale.y = -facing_right_visual_scale_y
-	
-	# Set is_facing_right
-	is_facing_right = new_is_facing_right
-
-func shoot():
-	const BULLET = preload("res://bullet.tscn")
-	
-	# Instantiate new bullet at shoot point with rotation of gun
-	var new_bullet: Area2D = BULLET.instantiate()
-	new_bullet.global_position = %ShootPoint.global_position
-	new_bullet.rotation = rotation
-	%ShootPoint.add_child(new_bullet)
-
-func _on_shoot_timer_timeout() -> void:
-	# Shoot if there is a target
-	if target:
-		shoot()
-
-func _on_target_switch_timer_timeout() -> void:
-	# Switch target by timer instead of each frame
-	target = get_closest_enemy()
+		%Pistol.scale.y = -_facing_right_visual_scale_y

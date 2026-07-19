@@ -14,6 +14,15 @@ var was_walking: bool = false
 # Base game-state functions
 func _ready() -> void:
 	%HealthBar.value = health
+	
+	for i in range(1):
+		const GUN = preload("res://gun.tscn")
+		
+		var new_gun: Gun = GUN.instantiate()
+		new_gun.enable_autofire()
+		
+		%GunHandler.add_child(new_gun)
+		%GunHandler.guns.append(new_gun)
 
 func _physics_process(delta: float) -> void:
 	update_player_movement()
