@@ -12,6 +12,8 @@ func _ready() -> void:
 	%WaveTimer.timeout.connect(next_wave)
 	
 	# Start wave timer for initial wave start
+	%HUD.wave_bar.start_intermission(wave_delay)
+	%HUD.wave_bar.set_text("Intermission")
 	%WaveTimer.start(wave_delay)
 
 ## Start the next wave.
@@ -37,6 +39,7 @@ func _on_mob_spawner_mob_killed(progress: float) -> void:
 	
 	# Wave complete
 	if progress >= 1.0:
-		print("Wave complete, waiting ", wave_delay, "s until next wave")
+		print("Wave complete, intermission for ", wave_delay, "s")
 		%HUD.wave_bar.start_intermission(wave_delay)
+		%HUD.wave_bar.set_text("WAVE COMPLETE!")
 		%WaveTimer.start(wave_delay)

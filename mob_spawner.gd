@@ -16,12 +16,9 @@ var _spawned_count := 0
 var _died_count := 0
 
 func start(count: int, delay: float) -> bool:
-	print("BOOP")
 	if is_started():
 		printerr("Mob spawner is already started - use stop() before starting again")
 		return false
-	
-	print("Happens")
 	
 	if delay <= 0:
 		printerr("Delay must be > 0")
@@ -76,8 +73,6 @@ func _on_timer_timeout() -> void:
 		mob_spawned.emit(progress)
 
 func _on_mob_killed() -> void:
-	_died_count += 1
-	print("Mob died (", _died_count, ")")
-	
+	_died_count += 1	
 	var progress = clamp(float(_died_count) / _target_count, 0.0, 1.0)
 	mob_killed.emit(progress)

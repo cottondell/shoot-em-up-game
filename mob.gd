@@ -46,8 +46,6 @@ func kill():
 	health_depleted.emit()
 
 func spawn_on_self(resource: Resource, offset: Vector2):
-	print("Spawning " + resource.resource_path)
-	
 	var new: Node2D = resource.instantiate()
 	new.global_position = global_position + offset
 	call_deferred("add_to_parent", new)

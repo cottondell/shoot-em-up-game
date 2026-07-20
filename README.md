@@ -11,9 +11,7 @@ A vampire survivor like game made & extended from the GDQuest
   - Not pleased with how I implemented the gun handling - the gun class is alright tho
 - ~~Random chance to spawn heal item at enemy when killed~~
 - ~~Add waves which increase in difficulty (infinite or finite)~~
-- Make UI to show wave progress
-  - Progress bar which shrinks as mobs are killed
-  - Change colour & increases during wave delay
+- ~~Make UI to show wave progress~~
 - Spawn heal item at last alive enemy of each wave once complete
 - Add power-ups (e.g. rapid fire, higher damage, penetration)
 - Add more types of guns

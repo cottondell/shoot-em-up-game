@@ -17,20 +17,6 @@ noise_type = 0
 seed = 1
 frequency = 0.0388
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7jktm"]
-bg_color = Color(0.15294118, 0.16862746, 0.1882353, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ryrav"]
-bg_color = Color(0.3882353, 0.8, 0.37254903, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
 [node name="Game" type="Node2D" unique_id=1543251644]
 y_sort_enabled = true
 script = ExtResource("1_fc0e3")
@@ -69,18 +55,6 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 wait_time = 5.0
 one_shot = true
-
-[node name="HealthBar" type="ProgressBar" parent="." unique_id=425222003]
-unique_name_in_owner = true
-offset_left = -92.0
-offset_top = -132.0
-offset_right = 96.0
-offset_bottom = -105.0
-theme_override_styles/background = SubResource("StyleBoxFlat_7jktm")
-theme_override_styles/fill = SubResource("StyleBoxFlat_ryrav")
-step = 1.0
-value = 100.0
-show_percentage = false
 
 [connection signal="health_depleted" from="Player" to="." method="_on_player_health_depleted"]
 [connection signal="mob_killed" from="MobSpawner" to="." method="_on_mob_spawner_mob_killed"]

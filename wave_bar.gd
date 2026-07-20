@@ -30,6 +30,12 @@ func start_intermission(time: float):
 	lerp_active = true
 	%WaveLabel.hide()
 
+func set_text(text: String):
+	%WaveLabel.text = text
+	%WaveLabel.show()
+
 func update(factor: float):
-	if !lerp_active:
-		value = factor
+	if lerp_active:
+		lerp_active = false
+	
+	value = factor
