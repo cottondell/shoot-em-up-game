@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://f4dfudtp8gci"]
+
+[ext_resource type="Script" uid="uid://wbytw0htiwl0" path="res://mob_spawner.gd" id="1_fir6i"]
+
+[node name="MobSpawner" type="Node2D" unique_id=241811711]
+y_sort_enabled = true
+script = ExtResource("1_fir6i")
+
+[node name="Timer" type="Timer" parent="." unique_id=45903603]
+unique_name_in_owner = true
+wait_time = 0.3
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cljy85d2ojng5" path="res://tree_spawner.gd" id="1_dkscf"]
 
-[node name="TreeSpawner" type="Node2D" unique_id=473368918]
+[node name="TreeSpawner" type="Node2D" unique_id=1382704146]
 y_sort_enabled = true
 script = ExtResource("1_dkscf")
 

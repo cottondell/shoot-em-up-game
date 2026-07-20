@@ -15,10 +15,10 @@ func _physics_process(delta: float) -> void:
 	if distance_travelled > RANGE:
 		queue_free()
 
-
 func _on_body_entered(body: Node2D) -> void:
 	# Destroy bullet
 	queue_free()
 	
+	# Damage body
 	if body.has_method("take_damage"):
 		body.take_damage()

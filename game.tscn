@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c1sx7bic4uhdj" path="res://player.tscn" id="1_e2o6t"]
 [ext_resource type="Script" uid="uid://dususlr2yr63q" path="res://game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://cdk7gbdj7lubp" path="res://tree_spawner.tscn" id="4_7jktm"]
+[ext_resource type="PackedScene" uid="uid://f4dfudtp8gci" path="res://mob_spawner.tscn" id="4_fc0e3"]
 
 [sub_resource type="Curve2D" id="Curve2D_feb5d"]
 _data = {
@@ -19,10 +20,10 @@ frequency = 0.0388
 y_sort_enabled = true
 script = ExtResource("1_fc0e3")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=199041173]
+[node name="Background" type="CanvasLayer" parent="." unique_id=199041173]
 layer = -30
 
-[node name="Background" type="ColorRect" parent="CanvasLayer" unique_id=617258135]
+[node name="ColorRect" type="ColorRect" parent="Background" unique_id=617258135]
 offset_right = 1920.0
 offset_bottom = 1080.0
 
@@ -38,14 +39,13 @@ unique_name_in_owner = true
 position = Vector2(2006.0565, -150)
 progress = 6930.0366
 
-[node name="MobSpawnTimer" type="Timer" parent="Player/MobSpawnPath" unique_id=1181806270]
-unique_name_in_owner = true
-wait_time = 0.3
-autostart = true
-
 [node name="TreeSpawner" parent="." unique_id=473368918 node_paths=PackedStringArray("player") instance=ExtResource("4_7jktm")]
 player = NodePath("../Player")
 noise_map = SubResource("FastNoiseLite_fc0e3")
+
+[node name="MobSpawner" parent="." unique_id=1746118868 node_paths=PackedStringArray("spawn_path_follow") instance=ExtResource("4_fc0e3")]
+unique_name_in_owner = true
+spawn_path_follow = NodePath("../Player/MobSpawnPath/MobSpawnFollow")
 
 [node name="GameOver" type="CanvasLayer" parent="." unique_id=675521235]
 unique_name_in_owner = true
@@ -72,4 +72,4 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="health_depleted" from="Player" to="." method="_on_player_health_depleted"]
-[connection signal="timeout" from="Player/MobSpawnPath/MobSpawnTimer" to="." method="_on_mob_spawn_timer_timeout"]
+[connection signal="mob_killed" from="MobSpawner" to="." method="_on_mob_spawner_mob_killed"]
