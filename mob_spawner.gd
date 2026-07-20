@@ -72,12 +72,12 @@ func _on_timer_timeout() -> void:
 		if _spawned_count == _target_count:
 			stop()
 		
-		var progress = clamp(_spawned_count / _target_count, 0.0, 1.0)
+		var progress = clamp(float(_spawned_count) / _target_count, 0.0, 1.0)
 		mob_spawned.emit(progress)
 
 func _on_mob_killed() -> void:
 	_died_count += 1
 	print("Mob died (", _died_count, ")")
 	
-	var progress = clamp(_died_count / _target_count, 0.0, 1.0)
+	var progress = clamp(float(_died_count) / _target_count, 0.0, 1.0)
 	mob_killed.emit(progress)
