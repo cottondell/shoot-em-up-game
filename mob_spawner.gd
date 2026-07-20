@@ -16,9 +16,12 @@ var _spawned_count := 0
 var _died_count := 0
 
 func start(count: int, delay: float) -> bool:
-	if _mode != MODE_DISABLED:
+	print("BOOP")
+	if is_started():
 		printerr("Mob spawner is already started - use stop() before starting again")
 		return false
+	
+	print("Happens")
 	
 	if delay <= 0:
 		printerr("Delay must be > 0")

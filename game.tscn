@@ -71,5 +71,11 @@ text = "Game Over!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="WaveTimer" type="Timer" parent="." unique_id=1435781592]
+unique_name_in_owner = true
+wait_time = 5.0
+one_shot = true
+
 [connection signal="health_depleted" from="Player" to="." method="_on_player_health_depleted"]
 [connection signal="mob_killed" from="MobSpawner" to="." method="_on_mob_spawner_mob_killed"]
+[connection signal="timeout" from="WaveTimer" to="." method="_on_wave_timer_timeout"]

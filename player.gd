@@ -50,12 +50,16 @@ func update_player_movement():
 		was_walking = false
 		%HappyBoo.play_idle_animation()
 
+## Add health to the player.
 func add_health(value: float):
 	health += value
 	
 	if health > 100:
 		health = 100
+	
+	update_healthbar()
 
+## Takes health off of the player.
 func remove_health(value: float):
 	health -= value
 	
@@ -64,10 +68,15 @@ func remove_health(value: float):
 	
 	if health == 0:
 		health_depleted.emit()
+	
+	update_healthbar()
 
-# Calculate damage that should be applied to player and deal it
+## Update the healthbar with the current health.
+func update_healthbar():
+	%HealthBar.value = health
+
+## Calculate damage that should be applied to player and deal it.
 func calculate_damage_self(delta: float):
 	var overlapping_mobs = %HurtBox.get_overlapping_bodies()
 	if overlapping_mobs.size() > 0:
 		remove_health(damage_rate * overlapping_mobs.size() * delta)
-		%HealthBar.value = health
