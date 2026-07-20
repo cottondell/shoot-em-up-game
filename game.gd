@@ -24,8 +24,7 @@ func next_wave():
 	%MobSpawner.start(mob_count, mob_spawn_delay)
 	
 	print("Started wave ", wave, " (", mob_count, " mobs)")
-	%HUD.set_wave_number(wave)
-	%HUD.update_wave_bar(1.0)
+	%HUD.wave_bar.start_wave(wave)
 
 ## End the game when the player's health is depleted.
 func _on_player_health_depleted() -> void:
@@ -34,9 +33,10 @@ func _on_player_health_depleted() -> void:
 
 ## Detect wave progression when mobs are killed.
 func _on_mob_spawner_mob_killed(progress: float) -> void:
-	%HUD.update_wave_bar(1.0 - progress)
+	%HUD.wave_bar.update(1.0 - progress)
 	
 	# Wave complete
 	if progress >= 1.0:
 		print("Wave complete, waiting ", wave_delay, "s until next wave")
+		%HUD.wave_bar.start_intermission(wave_delay)
 		%WaveTimer.start(wave_delay)

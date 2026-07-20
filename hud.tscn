@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c4qa0p01kvr1m"]
 
 [ext_resource type="Script" uid="uid://bn7edbedjjq1r" path="res://hud.gd" id="1_37p78"]
+[ext_resource type="Script" uid="uid://bubffxd813jni" path="res://wave_bar.gd" id="2_64ctp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_37p78"]
 bg_color = Color(0.15294118, 0.16862746, 0.1882353, 1)
@@ -10,7 +11,7 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_64ctp"]
-bg_color = Color(0.6024427, 0.6914455, 0.8787653, 1)
+bg_color = Color(0.6039216, 0.6901961, 0.8784314, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -14410,8 +14411,10 @@ grow_horizontal = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_37p78")
 theme_override_styles/fill = SubResource("StyleBoxFlat_64ctp")
 max_value = 1.0
+step = 0.0
 value = 0.5
 show_percentage = false
+script = ExtResource("2_64ctp")
 
 [node name="WaveLabel" type="Label" parent="WaveBar" unique_id=733937258]
 unique_name_in_owner = true
