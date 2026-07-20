@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dususlr2yr63q" path="res://game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://cdk7gbdj7lubp" path="res://tree_spawner.tscn" id="4_7jktm"]
 [ext_resource type="PackedScene" uid="uid://f4dfudtp8gci" path="res://mob_spawner.tscn" id="4_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://c4qa0p01kvr1m" path="res://hud.tscn" id="5_7jktm"]
 
 [sub_resource type="Curve2D" id="Curve2D_feb5d"]
 _data = {
@@ -47,29 +48,8 @@ noise_map = SubResource("FastNoiseLite_fc0e3")
 unique_name_in_owner = true
 spawn_path_follow = NodePath("../Player/MobSpawnPath/MobSpawnFollow")
 
-[node name="GameOver" type="CanvasLayer" parent="." unique_id=675521235]
+[node name="HUD" parent="." unique_id=669345495 instance=ExtResource("5_7jktm")]
 unique_name_in_owner = true
-visible = false
-
-[node name="ColorRect" type="ColorRect" parent="GameOver" unique_id=1673924958]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.54509807)
-
-[node name="Label" type="Label" parent="GameOver/ColorRect" unique_id=698232473]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 155
-text = "Game Over!"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="WaveTimer" type="Timer" parent="." unique_id=1435781592]
 unique_name_in_owner = true

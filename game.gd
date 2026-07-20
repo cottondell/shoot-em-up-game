@@ -27,7 +27,7 @@ func next_wave():
 
 ## End the game when the player's health is depleted.
 func _on_player_health_depleted() -> void:
-	%GameOver.show()
+	%HUD.show_game_over()
 	get_tree().paused = true
 
 ## Detect wave progression when mobs are killed.

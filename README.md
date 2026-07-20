@@ -10,10 +10,10 @@ A vampire survivor like game made & extended from the GDQuest
 - ~~Add support for holding multiple guns (each points at a different enemy)~~
   - Not pleased with how I implemented the gun handling - the gun class is alright tho
 - ~~Random chance to spawn heal item at enemy when killed~~
-- Add waves which increase in difficulty (infinite or finite)
-  - Put main game control in game.gd, containing game loop (event-based)
-  - Separate mechanics like mob spawning into other scripts & nodes
-  - These scripts should have some functions & signals to allow main game script to change & detect changes to their state
+- ~~Add waves which increase in difficulty (infinite or finite)~~
+- Make UI to show wave progress
+  - Progress bar which shrinks as mobs are killed
+  - Change colour & increases during wave delay
 - Spawn heal item at last alive enemy of each wave once complete
 - Add power-ups (e.g. rapid fire, higher damage, penetration)
 - Add more types of guns

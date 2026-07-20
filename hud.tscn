@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://c4qa0p01kvr1m"]
+
+[ext_resource type="Script" uid="uid://bn7edbedjjq1r" path="res://hud.gd" id="1_37p78"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_37p78"]
+bg_color = Color(0.15294118, 0.16862746, 0.1882353, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_64ctp"]
+bg_color = Color(0.6024427, 0.6914455, 0.8787653, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="HUD" type="CanvasLayer" unique_id=669345495]
+script = ExtResource("1_37p78")
+
+[node name="WaveBar" type="ProgressBar" parent="." unique_id=1658131324]
+unique_name_in_owner = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -322.0
+offset_top = 18.0
+offset_right = 322.0
+offset_bottom = 65.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_37p78")
+theme_override_styles/fill = SubResource("StyleBoxFlat_64ctp")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="WaveLabel" type="Label" parent="WaveBar" unique_id=733937258]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -22.5
+offset_right = 52.0
+offset_bottom = 19.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Wave 1"
+
+[node name="GameOver" type="ColorRect" parent="." unique_id=1186160012]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.54509807)
+
+[node name="Label" type="Label" parent="GameOver" unique_id=2023237110]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 155
+text = "Game Over!"
+horizontal_alignment = 1
+vertical_alignment = 1
