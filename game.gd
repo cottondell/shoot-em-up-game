@@ -36,12 +36,30 @@ func next_wave():
 
 ## Restart the game.
 func restart():
-	get_tree().paused = false
-	get_tree().reload_current_scene()
+	# Re-use wave timer for fade out timer
+	%WaveTimer.timeout.disconnect(next_wave)
+	%FadeScreen.fade.connect(func():
+		get_tree().paused = false
+		get_tree().reload_current_scene())
+	
+	# Start screen fade
+	%FadeScreen.fade_out(Color.BLACK, 1)
+	
+	# Start timer for reloading scene
+	%WaveTimer.start(1)
 
 func exit_to_main_menu():
-	get_tree().paused = false
-	get_tree().change_scene_to_file("res://main_menu.tscn")
+	# Re-use wave timer for fade out timer
+	%WaveTimer.timeout.disconnect(next_wave)
+	%FadeScreen.fade.connect(func():
+		get_tree().paused = false
+		get_tree().change_scene_to_file("res://main_menu.tscn"))
+	
+	# Start screen fade
+	%FadeScreen.fade_out(Color.BLACK, 1)
+	
+	# Start timer for switching scene
+	%WaveTimer.start(1)
 
 ## End the game when the player's health is depleted.
 func _on_player_health_depleted() -> void:

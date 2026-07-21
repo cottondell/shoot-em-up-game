@@ -744,7 +744,7 @@ tracks/13/keys = {
 "times": PackedFloat32Array(0, 0.166667, 0.3, 0.466667),
 "transitions": PackedFloat32Array(0.392292, 1.31951, 0.267943, 1.8025),
 "update": 0,
-"values": [0.024434609527920217, 0.20943951023931956, -0.03665191429188132, -0.23911010752322295]
+"values": [0.02443460952792021, 0.20943951023931956, -0.03665191429188132, -0.23911010752322295]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wrcpu"]

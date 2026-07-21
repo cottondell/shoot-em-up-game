@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cdk7gbdj7lubp" path="res://tree_spawner.tscn" id="4_7jktm"]
 [ext_resource type="PackedScene" uid="uid://f4dfudtp8gci" path="res://mob_spawner.tscn" id="4_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://c4qa0p01kvr1m" path="res://hud.tscn" id="5_7jktm"]
+[ext_resource type="PackedScene" uid="uid://buwidfther13l" path="res://fade_screen.tscn" id="6_ryrav"]
 
 [sub_resource type="Curve2D" id="Curve2D_feb5d"]
 _data = {
@@ -53,8 +54,14 @@ unique_name_in_owner = true
 
 [node name="WaveTimer" type="Timer" parent="." unique_id=1435781592]
 unique_name_in_owner = true
+process_mode = 3
 wait_time = 5.0
 one_shot = true
+
+[node name="FadeScreen" parent="." unique_id=86716984 instance=ExtResource("6_ryrav")]
+unique_name_in_owner = true
+autostart = 1
+autostart_colour = Color(1, 1, 1, 1)
 
 [connection signal="health_depleted" from="Player" to="." method="_on_player_health_depleted"]
 [connection signal="mob_killed" from="MobSpawner" to="." method="_on_mob_spawner_mob_killed"]

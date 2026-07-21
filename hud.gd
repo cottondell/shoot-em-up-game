@@ -22,5 +22,3 @@ func show_title(text: String, time: float):
 	%Title.show()
 	%TitleTimer.timeout.connect(%Title.hide)
 	%TitleTimer.start(time)
-
-# Fade in / out
