@@ -1,22 +1,26 @@
 class_name HUD
 extends CanvasLayer
 
-# TODO: As a general thing, make ability to show pop-up with text (like Minecraft titles)
-
 # Wave bar
 @onready var wave_bar: WaveBar = %WaveBar
 
 # Game over
+@onready var game_over_retry_button: Button = %RetryButton
+@onready var game_over_menu_button: Button = %MenuButton
+
 func show_game_over():
 	%GameOver.show()
-	# Hide other UI elements?
+	%GameOverAnimation.play("fade_in")
 
 func hide_game_over():
 	%GameOver.hide()
+	%GameOverAnimation.play("fade_out")
 
-# Title
+# Title (unused)
 func show_title(text: String, time: float):
 	%Title.text = text
 	%Title.show()
 	%TitleTimer.timeout.connect(%Title.hide)
 	%TitleTimer.start(time)
+
+# Fade in / out

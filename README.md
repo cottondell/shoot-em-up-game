@@ -12,12 +12,12 @@ A vampire survivor like game made & extended from the GDQuest
 - ~~Random chance to spawn heal item at enemy when killed~~
 - ~~Add waves which increase in difficulty (infinite or finite)~~
 - ~~Make UI to show wave progress~~
-- Spawn heal item at last alive enemy of each wave once complete
+- Spawn heal pickup at last alive enemy of each wave once complete
 - Add power-ups (e.g. rapid fire, higher damage, penetration)
 - Add more types of guns
 - Flip player visuals left / right depending on movement direction
   - This is hard to do to look good because flipping the whole "HappyBoo" means the walking animation looks weird (instantly switches which side the up / down leg is on)
   - Maybe an overlapping animation to change direction of legs would work better, instead of switching which leg is which
-- Add kick for when enemy is too close
+- Kick enemies when too close for gun
 - Allow slimes to pass between smaller gaps by squeezing through
 - Implement muzzle flash from provided assets & make gun show over bullet

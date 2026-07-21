@@ -8,12 +8,18 @@ var wave_delay := 5.0
 var is_in_wave := false
 
 func _ready() -> void:
-	# Trigger next_wave() when WaveTimer times out
-	%WaveTimer.timeout.connect(next_wave)
+	# TODO: Trigger fade in
 	
-	# Start wave timer for initial wave start
+	%HUD.game_over_retry_button.pressed.connect(restart)
+	%HUD.game_over_menu_button.pressed.connect(exit_to_main_menu)
+	
+	# Show wave bar for initial intermission
 	%HUD.wave_bar.start_intermission(wave_delay)
 	%HUD.wave_bar.set_text("Intermission")
+	%HUD.wave_bar.show()
+	
+	# Set-up wave timer listener & start initial intermission
+	%WaveTimer.timeout.connect(next_wave)
 	%WaveTimer.start(wave_delay)
 
 ## Start the next wave.
@@ -27,6 +33,15 @@ func next_wave():
 	
 	print("Started wave ", wave, " (", mob_count, " mobs)")
 	%HUD.wave_bar.start_wave(wave)
+
+## Restart the game.
+func restart():
+	get_tree().paused = false
+	get_tree().reload_current_scene()
+
+func exit_to_main_menu():
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://main_menu.tscn")
 
 ## End the game when the player's health is depleted.
 func _on_player_health_depleted() -> void:
