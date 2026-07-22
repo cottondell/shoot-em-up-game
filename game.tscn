@@ -49,14 +49,14 @@ noise_map = SubResource("FastNoiseLite_fc0e3")
 unique_name_in_owner = true
 spawn_path_follow = NodePath("../Player/MobSpawnPath/MobSpawnFollow")
 
-[node name="HUD" parent="." unique_id=669345495 instance=ExtResource("5_7jktm")]
-unique_name_in_owner = true
-
 [node name="WaveTimer" type="Timer" parent="." unique_id=1435781592]
 unique_name_in_owner = true
 process_mode = 3
 wait_time = 5.0
 one_shot = true
+
+[node name="HUD" parent="." unique_id=669345495 instance=ExtResource("5_7jktm")]
+unique_name_in_owner = true
 
 [node name="FadeScreen" parent="." unique_id=86716984 instance=ExtResource("6_ryrav")]
 unique_name_in_owner = true

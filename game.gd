@@ -8,8 +8,6 @@ var wave_delay := 5.0
 var is_in_wave := false
 
 func _ready() -> void:
-	# TODO: Trigger fade in
-	
 	%HUD.game_over_retry_button.pressed.connect(restart)
 	%HUD.game_over_menu_button.pressed.connect(exit_to_main_menu)
 	
@@ -36,30 +34,23 @@ func next_wave():
 
 ## Restart the game.
 func restart():
-	# Re-use wave timer for fade out timer
-	%WaveTimer.timeout.disconnect(next_wave)
-	%WaveTimer.timeout.connect(func():
-		get_tree().paused = false
-		get_tree().reload_current_scene())
-	
 	# Start screen fade
 	%FadeScreen.fade_out(Color.WHITE, 1)
 	
-	# Start timer for reloading scene
-	%WaveTimer.start(1)
+	# Switch scene in 1s with a SceneTreeTimer
+	get_tree().create_timer(1.0).timeout.connect(func():
+		get_tree().paused = false
+		get_tree().reload_current_scene())
 
 func exit_to_main_menu():
-	# Re-use wave timer for fade out timer
-	%WaveTimer.timeout.disconnect(next_wave)
-	%WaveTimer.timeout.connect(func():
-		get_tree().paused = false
-		get_tree().change_scene_to_file("res://main_menu.tscn"))
-	
 	# Start screen fade
 	%FadeScreen.fade_out(Color.BLACK, 1)
 	
-	# Start timer for switching scene
-	%WaveTimer.start(1)
+	# Switch scene in 1s with a SceneTreeTimer
+	get_tree().create_timer(1.0).timeout.connect(func():
+		get_tree().paused = false
+		get_tree().change_scene_to_file("res://main_menu.tscn"))
+	
 
 ## End the game when the player's health is depleted.
 func _on_player_health_depleted() -> void:
