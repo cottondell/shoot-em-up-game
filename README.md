@@ -1,6 +1,12 @@
 # Shoot 'em up
-A vampire survivor like game made & extended from the GDQuest 
-"Your First 2D GAME From Zero in Godot 4" tutorial ([link to tutorial](https://youtu.be/GwCiGixlqiU)).
+This is a little shoot 'em up game I made for fun + to build-up my skills.
+
+It's based on a short GDQuest tutorial, which I then added to - "Your First 2D GAME From Zero in Godot 4" ([link](https://youtu.be/GwCiGixlqiU)).
+
+It goes on indefinitely, and the only directive is to survive!
+Don't wander too far whilst mobs are spawning, as they might get stuck on trees 😝
+
+Released versions of the game are available on the [itch.io page](https://dylanbeard.itch.io/shoot-em-up).
 
 ## Extensions
 - ~~Make gun actually point at closest mob, not first in array~~
