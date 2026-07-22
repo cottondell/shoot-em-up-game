@@ -17,6 +17,10 @@ texture = ExtResource("1_vk1bi")
 unique_name_in_owner = true
 position = Vector2(26, -11)
 
+[node name="FlashPoint" type="Marker2D" parent="WeaponPivot/Pistol" unique_id=746779071]
+unique_name_in_owner = true
+position = Vector2(26, -11)
+
 [node name="AutofireTimer" type="Timer" parent="." unique_id=493512823]
 unique_name_in_owner = true
 wait_time = 0.3

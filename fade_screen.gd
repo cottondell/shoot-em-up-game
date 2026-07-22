@@ -23,5 +23,5 @@ func fade_out(colour: Color, duration: float):
 	%AnimationPlayer.speed_scale = 1 / duration
 	%AnimationPlayer.play("fade_out")
 
-func _on_animation_finished(anim_name: StringName) -> void:
+func _on_animation_finished(_anim_name: StringName) -> void:
 	fade_complete.emit()

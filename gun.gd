@@ -1,83 +1,83 @@
 class_name Gun
 extends Node2D
 
-# Changing how guns work:
-# - Only mode currently is follow mode
-# - Guns have a target which is set by another script
-# - They constantly point at the target
-# - Other script tells them when to fire via function
-# - Optional auto-fire mode where speed can be set by other script
+# Constants
+const BULLET = preload("res://bullet.tscn")
+const MUZZLE_FLASH = preload("res://pistol/muzzle_flash/muzzle_flash.tscn")
+
+# Public variables
+var target: Node2D
 
 # Private variables
+var _autofire_enabled: bool = true
+var _autofire_delay: float = 0.3
 var _is_facing_right: bool = true
 @onready var _facing_right_visual_scale_y = %Pistol.scale.y
 
-# Autofire variables
-var target: Node2D
-var autofire_enabled: bool = false
-var autofire_delay: float = 0.3
-
 # Engine events
 func _ready() -> void:
-	if autofire_enabled:
-		%AutofireTimer.start(autofire_delay)
+	if _autofire_enabled:
+		%AutofireTimer.start(_autofire_delay)
 
 func _physics_process(_delta: float) -> void:
 	# Try aim at target
-	if aim_at_target():
+	if _aim_at_target():
 		# Flip orientation of gun visual if needed
-		fix_visual_orientation()
+		_fix_visual_orientation()
 
 # Functions
 ## Fire a bullet from the shoot point of the gun.
 func shoot():
-	const BULLET = preload("res://bullet.tscn")
-	
 	# Instantiate new bullet at shoot point with rotation of gun
 	var new_bullet: Area2D = BULLET.instantiate()
 	new_bullet.global_position = %ShootPoint.global_position
 	new_bullet.global_rotation = global_rotation
+	new_bullet.z_index = z_index - 1
 	%ShootPoint.add_child(new_bullet)
+	
+	# Instantiate new muzzle flash at shoot point with rotation of gun
+	var new_flash: Node2D = MUZZLE_FLASH.instantiate()
+	%FlashPoint.add_child(new_flash)
+	print("Created new flash: ", new_flash.global_position)
 
 # Autofire functions
 func enable_autofire():
-	if autofire_enabled:
+	if _autofire_enabled:
 		return
 	
-	autofire_enabled = true
+	_autofire_enabled = true
 	
 	if is_node_ready():
-		print(%AutofireTimer.paused)
-		%AutofireTimer.start(autofire_delay)
-		print(%AutofireTimer.paused)
+		%AutofireTimer.start(_autofire_delay)
 
 func disable_autofire():
-	if !autofire_enabled:
+	if !_autofire_enabled:
 		return
 	
-	autofire_enabled = false
+	_autofire_enabled = false
 	
 	if is_node_ready():
 		%AutofireTimer.stop()
 
 func set_autofire_delay(delay: float):
-	autofire_delay = delay
+	_autofire_delay = delay
 	
-	if autofire_enabled && is_node_ready():
+	if _autofire_enabled && is_node_ready():
 		%AutofireTimer.wait_time = delay
 
 ## Shoot gun when autofire timer times out
 func _on_autofire_timer_timeout() -> void:
 	# Shoot gun if autofire is enabled
-	if autofire_enabled:
+	if _autofire_enabled:
 		shoot()
 	
 	# Safety catch incase timer is enabled when it should be disabled
 	else:
 		%AutofireTimer.stop()
 
+# Auto aim functions
 ## Rotate gun to point at target, if one is set.
-func aim_at_target() -> bool:
+func _aim_at_target() -> bool:
 	# No target to aim at
 	if !target:
 		return false
@@ -99,7 +99,7 @@ func aim_at_target() -> bool:
 	return true
 
 ## Change y scale to flip gun depending on which direction it's facing.
-func fix_visual_orientation():
+func _fix_visual_orientation():
 	var new_is_facing_right = abs(rotation) < PI / 2
 	
 	# Not changed -> don't do anything

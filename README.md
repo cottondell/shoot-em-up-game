@@ -14,7 +14,7 @@ A vampire survivor like game made & extended from the GDQuest
 - ~~Make UI to show wave progress~~
 - ~~Make main menu~~
 - ~~Animate scenes transitions & game over UI~~
-- Implement muzzle flash from provided assets & make gun show over bullet
+- ~~Implement muzzle flash from provided assets & make gun show over bullet~~
 - Allow slimes to pass between smaller gaps by squeezing through
 - Add power-ups (e.g. rapid fire, higher damage, penetration)
 - Add more types of guns

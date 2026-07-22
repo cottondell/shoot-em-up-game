@@ -2,14 +2,20 @@ extends Area2D
 
 var guns: Array[Gun]
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	aim_guns()
 
 func aim_guns():
 	var enemies = get_enemies_by_range()
 	
-	for i in range(min(guns.size(), enemies.size())):
-		guns[i].target = enemies[i]
+	for i in range(guns.size()):
+		if i < enemies.size():
+			guns[i].target = enemies[i]
+			guns[i].enable_autofire()
+			guns[i].show()
+		else:
+			guns[i].hide()
+			guns[i].disable_autofire()
 
 class Node2DWithFloat:
 	var node: Node2D
