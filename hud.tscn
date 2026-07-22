@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bn7edbedjjq1r" path="res://hud.gd" id="1_37p78"]
 [ext_resource type="Script" uid="uid://bubffxd813jni" path="res://wave_bar.gd" id="2_64ctp"]
-[ext_resource type="FontVariation" uid="uid://cpergjtp01rsw" path="res://base_font.tres" id="3_8sq4i"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_37p78"]
 bg_color = Color(0.15294118, 0.16862746, 0.1882353, 1)
@@ -152,7 +151,6 @@ script = ExtResource("1_37p78")
 
 [node name="WaveBar" type="ProgressBar" parent="." unique_id=1658131324]
 unique_name_in_owner = true
-visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -185,7 +183,6 @@ offset_bottom = 21.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_8sq4i")
 theme_override_font_sizes/font_size = 36
 text = "Wave 1"
 horizontal_alignment = 1

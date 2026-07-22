@@ -38,7 +38,6 @@ func shoot():
 	# Instantiate new muzzle flash at shoot point with rotation of gun
 	var new_flash: Node2D = MUZZLE_FLASH.instantiate()
 	%FlashPoint.add_child(new_flash)
-	print("Created new flash: ", new_flash.global_position)
 
 # Autofire functions
 func enable_autofire():

@@ -1,4 +1,4 @@
-# Shoot 'em Up
+# Shoot 'em up
 A vampire survivor like game made & extended from the GDQuest 
 "Your First 2D GAME From Zero in Godot 4" tutorial ([link to tutorial](https://youtu.be/GwCiGixlqiU)).
 
