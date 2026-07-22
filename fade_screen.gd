@@ -17,13 +17,11 @@ func fade_in(colour: Color, duration: float):
 	%ColorRect.modulate = Color(1, 1, 1, 1)
 	%AnimationPlayer.speed_scale = 1 / duration
 	%AnimationPlayer.play("fade_in")
-	print("Fade in")
 
 func fade_out(colour: Color, duration: float):
 	%ColorRect.color = colour
 	%AnimationPlayer.speed_scale = 1 / duration
 	%AnimationPlayer.play("fade_out")
-	print("Fade out")
 
 func _on_animation_finished(anim_name: StringName) -> void:
 	fade_complete.emit()

@@ -38,12 +38,12 @@ func next_wave():
 func restart():
 	# Re-use wave timer for fade out timer
 	%WaveTimer.timeout.disconnect(next_wave)
-	%FadeScreen.fade.connect(func():
+	%WaveTimer.timeout.connect(func():
 		get_tree().paused = false
 		get_tree().reload_current_scene())
 	
 	# Start screen fade
-	%FadeScreen.fade_out(Color.BLACK, 1)
+	%FadeScreen.fade_out(Color.WHITE, 1)
 	
 	# Start timer for reloading scene
 	%WaveTimer.start(1)
@@ -51,7 +51,7 @@ func restart():
 func exit_to_main_menu():
 	# Re-use wave timer for fade out timer
 	%WaveTimer.timeout.disconnect(next_wave)
-	%FadeScreen.fade.connect(func():
+	%WaveTimer.timeout.connect(func():
 		get_tree().paused = false
 		get_tree().change_scene_to_file("res://main_menu.tscn"))
 	
@@ -63,14 +63,16 @@ func exit_to_main_menu():
 
 ## End the game when the player's health is depleted.
 func _on_player_health_depleted() -> void:
+	%WaveTimer.stop() # Safety in-case player dies in intermission (shouldn't happend currently)
 	%HUD.show_game_over()
 	get_tree().paused = true
 
 ## Detect wave progression when mobs are killed.
 func _on_mob_spawner_mob_killed(progress: float) -> void:
+	# Update wave bar
 	%HUD.wave_bar.update(1.0 - progress)
 	
-	# Wave complete
+	# Wave complete, start intermission
 	if progress >= 1.0:
 		print("Wave complete, intermission for ", wave_delay, "s")
 		%HUD.wave_bar.start_intermission(wave_delay)
